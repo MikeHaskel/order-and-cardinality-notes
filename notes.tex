@@ -3,10 +3,40 @@
 \usepackage{amsthm}
 \usepackage{amssymb}
 
-\title{Notes on Order, Well-Ordering, and Cardinality}
+\title{Notes on Order, Well-Order, and Cardinality}
 \author{Mike Haskel}
 \date{Fall, 2014}
 
 \begin{document}
 \maketitle
+
+\section{Introduction}
+The purpose of these notes is to rigorously introduce a handful of
+related core concepts that permeate mathematics.  The intended
+audience is any undergraduate or accellerated high school student who
+is familiar with the basic notation and concepts surrounding sets and
+functions.  The student should also be somewhat comfortable with the
+language involved in making and proving precise mathematical
+statements; they should, for example, be able to explain the
+difference between the sentences
+\begin{quote}
+  for all $x$, there is a $y$ such that $x+y=0$
+\end{quote}
+and
+\begin{quote}
+  there is $y$ such that, for all $x$, $x+y=0$.
+\end{quote}
+
+These notes will introduce the concepts of order, well-order, and
+cardinality.  Order is what it sounds like: any way of comparing two
+things that behaves as a comparison of size.  We draw attention to
+some of the different kinds of orders and the axioms (rules) they
+obey.  A particularly important type of order is a \emph{well-order}.
+Well orders behave like the natural numbers in that we can perform a
+certain kind of induction them.  We then use the ideas surrounding
+well-orders to prove \emph{Zorn's Theorem}, a broad and important
+mathematical tool.  With all these concepts in our arsenal, we finally
+turn to introduce the idea of \emph{cardinality}: the size of a
+(possibly infinite) set.
+
 \end{document}
