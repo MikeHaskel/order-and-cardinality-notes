@@ -7,6 +7,13 @@
 \author{Mike Haskel}
 \date{Fall, 2014}
 
+\newtheorem{theorem}{Theorem}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercize}
+\newtheorem{example}[theorem]{Example}
+
 \begin{document}
 \maketitle
 
@@ -39,4 +46,75 @@ mathematical tool.  With all these concepts in our arsenal, we finally
 turn to introduce the idea of \emph{cardinality}: the size of a
 (possibly infinite) set.
 
+\section{Background Review: Sets, Relations, and Functions}
+TODO.
+
+\section{Order}
+We want to study the idea of an order: a binary relation that behaves
+as a comparison of size.  We approach this idea in three steps, each
+of which is a useful concept in its own right.
+
+\begin{definition}
+  \label{def:preorder}
+  Let \(X\) be a set and \(\leq\) a binary relation on \(X\).  Then
+  \(\leq\) is a \emph{preorder} on \(X\) if it is reflexive and
+  transitive.
+\end{definition}
+
+\begin{definition}
+  \label{def:partialorder}
+  Let \(X\) be a set and \(\leq\) a preorder on \(X\).  Then \(\leq\)
+  is a \emph{partial order} if it is also antisymmetric.
+\end{definition}
+
+Note that the only defect of a preorder that prevents it from being a
+partial order is that it may be possible to have two elements \(a,b\)
+in \(X\) with \(a \leq b\) and \(b \leq a\), but nevertheless \(a \neq
+b\).  When \(\leq\) is a partial order, it is common to write \(a \sim
+b\) to denote that \(a \leq b\) and \(b \leq a\).  We can also use \(a
+\geq b\) as obvious shorthand for \(b \leq a\), and \(a < b\) as
+shorthand for indicating simultaneously that \(a \leq b\) and \(a
+\not\sim b\).
+
+\begin{example}
+  \label{example:prenotpartial}
+  Consider the set
+  \[X = \{\text{black}, \text{red}, \text{blue}\}\text{,}\]
+  and the binary relation
+  \begin{align*}
+    \mathord{\leq} = \{
+    &(\text{black}, \text{black}), \\
+    &(\text{black}, \text{red}), \\
+    &(\text{black}, \text{blue}), \\
+    &(\text{red}, \text{red}), \\
+    &(\text{red}, \text{blue}), \\
+    &(\text{blue}, \text{red}), \\
+    &(\text{blue}, \text{blue})
+    \} \text{.}
+  \end{align*}
+  It is routine to check that \(\leq\) is a preorder.  It is not a
+  partial order, however, because we have \(\text{red} \sim
+  \text{blue}\); that is, \(\text{red} \leq \text{blue}\) and
+  \(\text{blue} \leq \text{red}\).
+\end{example}
+
+\begin{example}
+  \label{example:partialnotlinear}
+  Consider the set
+  \[X = \{\text{black}, \text{red}, \text{blue}\}\text{,}\]
+  and the binary relation
+  \begin{align*}
+    \mathord{\leq} = \{
+    &(\text{black}, \text{black}), \\
+    &(\text{black}, \text{red}), \\
+    &(\text{black}, \text{blue}), \\
+    &(\text{red}, \text{red}), \\
+    &(\text{blue}, \text{blue})
+    \} \text{.}
+  \end{align*}
+  Again, it is routine to check that \(\leq\) is a preorder.  With our
+  modification, however, \(\leq\) is also a partial order.  Note in
+  particular the new behavior of red and blue: neither one is \(\leq\)
+  the other.  We say that red and blue are \emph{incomparable}.
+\end{example}
 \end{document}
