@@ -14,6 +14,9 @@
 \newtheorem{exercise}[theorem]{Exercize}
 \newtheorem{example}[theorem]{Example}
 
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\nnintegers}{{\integers^{\geq 0}}}
+
 \begin{document}
 \maketitle
 
@@ -112,9 +115,81 @@ shorthand for indicating simultaneously that \(a \leq b\) and \(a
     &(\text{blue}, \text{blue})
     \} \text{.}
   \end{align*}
-  Again, it is routine to check that \(\leq\) is a preorder.  With our
-  modification, however, \(\leq\) is also a partial order.  Note in
-  particular the new behavior of red and blue: neither one is \(\leq\)
-  the other.  We say that red and blue are \emph{incomparable}.
+  As in Example~\ref{example:prenotpartial}, it is routine to check
+  that \(\leq\) is a preorder.  With our modification, however,
+  \(\leq\) is also a partial order.  Note in particular the new
+  behavior of red and blue: neither one is \(\leq\) the other.  We say
+  that red and blue are \emph{incomparable}.
 \end{example}
+
+Our next concept is that of a \emph{total} (sometimes called
+\emph{linear}) order.
+
+\begin{definition}
+  Let \(X\) be a set, and let \(\leq\) be a preorder on \(X\).  If
+  there are no incomparable elements (that is, for all \(a\) and \(b\)
+  in \(X\), either \(a \leq b\) or \(b \leq a\)), then we call
+  \(\leq\) a \emph{total preorder}.  If \(\leq\) is additionally a
+  partial order, we just call \(\leq\) a \emph{total order}.
+\end{definition}
+
+The usual orders on the real numbers and on the integers are examples
+of total orders.
+
+\subsection{Chains and Orders on Subsets}
+TODO
+
+\subsection{Well-Order, Induction, and Recursion}
+Consider two examples of total orders: the real numbers and the
+nonnegative integers, each with their usual orders.  There are many
+differences between these orders, but one key difference is that it is
+possible to define a function all the positive integers by simply
+specifying how the value depends on the values the function takes on
+lesser integers.  For example, consider the function \(f:\nnintegers
+\to \integers\) defined by
+\[ f(n) = 1+\sum_{k<n} f(k) \text{.} \]
+We can make sense of this definition: \(f(0) = 1\) (since we interpret
+an empty sum as having value 0), \(f(1) = 1+1 = 2\), \(f(3) = 1+1+2 =
+4\), etc.  It is not possible to make sense of a definition like this
+for the real numbers without resorting to calculus, but calculus
+relies on properties beyond just the order itself.
+
+The key property of the nonnegative integers that allows us to make
+sense of the preceding definition is that the nonnegative integers
+have are \emph{well-ordered}.
+\begin{definition}
+  Let \(X\) be a set, and let \(\leq\) be a total order on \(X\).  If
+  every nonempty subset of \(X\) has a least element (that is, an
+  element of the subset \(\leq\) all other elements of the subset),
+  then we say that \(\leq\) is a \emph{well-order}.
+\end{definition}
+
+This property is equivalent to two other important properties.
+\begin{definition}
+  Let \(X\) be a set, and let \(\leq\) be a total order on \(X\).  Let
+  \(P \subset X\), and think of \(P\) as a unary relation: that is, a
+  property that may or may not hold of any individual element of
+  \(X\).  Assume we know that, whenever \(x \in X\) is such that \(P\)
+  holds of every \(y < x\), \(P\) in fact holds of \(x\).  In this
+  case, we wish to conclude that \(P = X\), i.e.\ \(P\) holds of every
+  \(x \in X\).  If this is true of \emph{every} \(P\) satisfying the
+  stated assumption, then we say that \(\leq\) has the
+  \emph{transfinite induction property}.
+\end{definition}
+\begin{definition}
+  Let \(X\) be a set, and let \(\leq\) be a total order on \(X\).  We
+  say that \(\leq\) \emph{admits an infinite descending sequence} if
+  it is possible to find \(x_0, x_1, \ldots\) such that
+  \[x_0 > x_1 > x_2 > \ldots\]
+\end{definition}
+\begin{theorem}
+  Let \(X\) be a set, and let \(\leq\) be a total order on \(X\).
+  Then the following are equivalent:
+  \begin{enumerate}
+    \item \(\leq\) is a well-order,
+    \item \(\leq\) has the transfinite induction property, and
+    \item \(\leq\) does not admit an infinite descending sequence.
+  \end{enumerate}
+\end{theorem}
+
 \end{document}
