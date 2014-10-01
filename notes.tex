@@ -16,6 +16,8 @@
 
 \newcommand{\integers}{\mathbb{Z}}
 \newcommand{\nnintegers}{{\integers^{\geq 0}}}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\setcomplement}[1]{{{#1}^{\mathsf{c}}}}
 
 \begin{document}
 \maketitle
@@ -180,16 +182,62 @@ This property is equivalent to two other important properties.
   Let \(X\) be a set, and let \(\leq\) be a total order on \(X\).  We
   say that \(\leq\) \emph{admits an infinite descending sequence} if
   it is possible to find \(x_0, x_1, \ldots\) such that
-  \[x_0 > x_1 > x_2 > \ldots\]
+  \[x_0 > x_1 > x_2 > \cdots \text{.}\]
 \end{definition}
 \begin{theorem}
   Let \(X\) be a set, and let \(\leq\) be a total order on \(X\).
   Then the following are equivalent:
   \begin{enumerate}
-    \item \(\leq\) is a well-order,
-    \item \(\leq\) has the transfinite induction property, and
-    \item \(\leq\) does not admit an infinite descending sequence.
+    \item\label{enum:wo-tfae-wo} \(\leq\) is a well-order,
+    \item\label{enum:wo-tfae-ind} \(\leq\) has the transfinite induction property, and
+    \item\label{enum:wo-tfae-desc} \(\leq\) does not admit an infinite descending sequence.
   \end{enumerate}
 \end{theorem}
+\begin{proof}
+  It is sufficient to show that \ref{enum:wo-tfae-wo} implies
+  \ref{enum:wo-tfae-ind}, \ref{enum:wo-tfae-ind} implies
+  \ref{enum:wo-tfae-desc}, and \ref{enum:wo-tfae-desc} implies
+  \ref{enum:wo-tfae-wo}.
+
+  (\ref{enum:wo-tfae-wo} \(\implies\) \ref{enum:wo-tfae-ind}).  I will
+  assume that \(\leq\) is a well-order that fails the transfinite
+  induction property, and derive a contradiction.  Failing the
+  transfinite induction property means that there is some \(P
+  \subseteq X\), \(P \neq X\) such that, whenever we have \(x \in X\)
+  with all \(y < x\) in \(P\), \(x \in P\).  Consider the complement
+  of \(P\), that is, \(\setcomplement{P}\), the set of all points in
+  \(X\) not in \(P\).  Since \(P \neq X\), we know that
+  \(\setcomplement{P}\) is nonempty.  Since \(\leq\) is a well-order,
+  take \(x\) the least element of \(\setcomplement{P}\).  Since \(x\)
+  is least, we know that all \(y < x\) are in \(P\).  By our
+  assumptions about \(P\), we can conclude that \(x \in P\),
+  contradicting \(x \in \setcomplement{P}\).
+
+  (\ref{enum:wo-tfae-ind} \(\implies\) \ref{enum:wo-tfae-desc}).  I
+  will assume that \(\leq\) admits an infinite descending sequence,
+  and show that \(\leq\) fails the transfinite induction property.
+  Assume we have an infinite descending sequence
+  \[x_0 > x_1 > x_2 > x_3 > \cdots \text{.}\]
+  Define \(P\) to be the set of \(x\) \emph{not} in given descending
+  sequence.  Let \(x \in X\) be arbitrary, and assume that, for all
+  \(y < x\), \(y \in P\) (i.e., \(y\) is not in the descending
+  sequence).  We know that \(x \in P\): if it were otherwise, \(x\)
+  would actually be \(x_i\) for some \(i\).  Then we would have
+  \(x_{i+1} < x\), and \(x_{i+1} \not\in P\), contradicting our
+  assumption about \(x\).  On the other hand, we know that \(P \neq
+  X\), so \(\leq\) fails the transfinite induction property.
+
+  (\ref{enum:wo-tfae-desc} \(\implies\) \ref{enum:wo-tfae-wo}).  I
+  will assume that \(\leq\) is not a well-order, and construct an
+  infinite descending sequence.  Since \(\leq\) is not a well-order,
+  take \(P \subseteq X\) nonempty with no least element.  I will
+  construct an infinite descending sequence one element at a time.
+  Since \(P\) is non-empty, set \(x_0\) to be any element of \(P\).
+  We know \(x_0\) is not a least element of \(P\) (since \(P\) has no
+  least element), so set \(x_1\) to be some element of \(P\) less than
+  \(x_0\).  Similarly, \(x_1\) is not a least element of \(P\), so set
+  \(x_2\) to be some element of \(P\) less than \(x_1\).  Repeat this
+  process to obtain an infinite descending sequence.
+\end{proof}
 
 \end{document}
