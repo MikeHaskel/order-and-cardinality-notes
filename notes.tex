@@ -19,6 +19,8 @@
 \renewcommand{\implies}{\Rightarrow}
 \newcommand{\setcomplement}[1]{{{#1}^{\mathsf{c}}}}
 
+\newcommand{\orderembeds}{\leq_{\mathrm{ord}}}
+
 \begin{document}
 \maketitle
 
@@ -138,10 +140,10 @@ Our next concept is that of a \emph{total} (sometimes called
 The usual orders on the real numbers and on the integers are examples
 of total orders.
 
-\subsection{Chains and Orders on Subsets}
+\subsection{Chains and Orders on Subsets}\label{section:chains}
 TODO
 
-\subsection{Well-Order, Induction, and Recursion}
+\subsection{Well-Order}
 Consider two examples of total orders: the real numbers and the
 nonnegative integers, each with their usual orders.  There are many
 differences between these orders, but one key difference is that it is
@@ -184,7 +186,7 @@ This property is equivalent to two other important properties.
   it is possible to find \(x_0, x_1, \ldots\) such that
   \[x_0 > x_1 > x_2 > \cdots \text{.}\]
 \end{definition}
-\begin{theorem}
+\begin{theorem}\label{theorem:wo-tfae}
   Let \(X\) be a set, and let \(\leq\) be a total order on \(X\).
   Then the following are equivalent:
   \begin{enumerate}
@@ -239,5 +241,61 @@ This property is equivalent to two other important properties.
   \(x_2\) to be some element of \(P\) less than \(x_1\).  Repeat this
   process to obtain an infinite descending sequence.
 \end{proof}
+
+Note that the infinite descending sequence criterion is particularly
+useful for determining whether an order is a well-order.
+\begin{exercise}
+  Show that any finite total order (that is, a total order on a finite
+  set) is a well-order.
+\end{exercise}
+\begin{exercise}
+  Show that the usual order on the integers is not a well-order.
+\end{exercise}
+\begin{exercise}
+  Show that the usual order on the nonnegative integers is a
+  well-order.  By convention, it is common to denote the nonnegative
+  integers by \(\omega\) when we are treating them as a well-ordered
+  set.
+\end{exercise}
+\begin{exercise}
+  Let \(X\) be a set equipped with a well-order \(\leq\).  Consider a
+  new set \(X+1\), which we define to be \(X\) together with a single
+  new element we call \(\infty\).  Give \(X+1\) an order by using the
+  original \(\leq\) on points from \(X\), together with the rule that
+  \(\infty\) is greater than everything else.  Show that this process
+  provides a well-order on \(X+1\).
+
+  Note that Theorem~\ref{theorem:wo-tfae} tell us that \(X+1\) has the
+  transfinite induction property.  If we consider the case where \(X =
+  \omega\), we can perform this specific form of induction even though
+  \(\omega+1\) contains an ``infinite'' element greater than every
+  nonnegative integer.  This ability to reach beyond the integers is
+  why we call this form of induction ``transfinite.''
+\end{exercise}
+\begin{exercise}
+  Let \(X\) and \(Y\) be sets, let \(\leq\) be a well-order on \(Y\),
+  and let \(f:X \to Y\) be an injection.  Show that the pullback of
+  \(\leq\) by \(f\) is a well-order on \(X\).
+
+  Note that, if we have a set \(X\), a well-order \(\leq\) on \(X\),
+  and a subset \(A\) of \(X\), the inclusion map from \(A\) to \(X\)
+  is an injection.  By this exercise, we know that \(\leq\) induces a
+  well-order on \(A\).
+\end{exercise}
+
+\subsection{Comparison of Well-Orders}
+Well-orders relate to each other in a particularly nice way: given any
+two sets with well-orders on them, we can interpret one as an initial
+segment of the other in a unique way.  In some sense, this fact means
+that a well-ordered set doesn't contain any information beyond ``how
+big'' it is, so it is common to think of a well-ordered set as a kind
+of number.  We make these notions precise in this section.
+
+\begin{definition}
+  Let \(X\) and \(Y\) be sets equipped with well-orders.  We write \(X
+  \orderembeds Y\) just if there is an order-preserving injection from
+  \(X\) to \(Y\).  It is immediate that this is a preorder on the
+  class of well-ordered sets.
+\end{definition}
 
 \end{document}
