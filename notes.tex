@@ -8,11 +8,21 @@
 \date{Fall, 2014}
 
 \newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
 
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
-\newtheorem{exercise}[theorem]{Exercize}
+\newtheorem{exercise}[theorem]{Exercise}
 \newtheorem{example}[theorem]{Example}
+
+\newcommand{\defterm}{\emph}
+\renewcommand{\subset}{\subseteq}
+\newcommand{\powerset}{\mathcal{P}}
+\newcommand{\cartesianprod}{\times}
+\newcommand{\inverse}[1]{{#1^{-1}}}
+\newcommand{\compose}{\circ}
 
 \begin{document}
 \maketitle
@@ -35,6 +45,222 @@ and
 \end{quote}
 
 \section{Sets, Functions, and Relations}
+
+\begin{definition}
+  A \defterm{set} is any collection of elements.  If \(X\) is a set,
+  we write \(x \in X\) to denote that \(x\) is an element of \(X\).
+  Two sets are considered equal if they have the same elements.
+  \footnote{We will sometimes refer to a collection of elements as a
+    \defterm{class}.  The distinction between a set and a class is
+    subtle and necessary only to avoid certain technical
+    contradictions, but for most purposes sets and classes behave
+    identically; in particular, almost all definitions and theorems we
+    give for sets work just as well for classes.  The main practical
+    distinctions between the two concepts are that
+    \begin{itemize}
+      \item we can usually only form a set using rules based on some
+        other set (e.g., if \(X\) is a set, the collection of subsets
+        \(X\) is a set), while we can form a class based on more
+        arbitrary rules (e.g, the collection of all finite sets is a
+        class); and
+      \item we allow sets to be elements of other collections, but we
+        do not consider collections whose elements are classes.
+    \end{itemize}}
+\end{definition}
+
+\begin{definition}
+  Let \(X\) and \(Y\) be sets.  We say that \(X\) is a
+  \defterm{subset} of \(Y\), and write \(X \subset Y\), if every
+  element of \(X\) is also an element of \(Y\).
+\end{definition}
+
+\begin{definition}
+  Let \(x\) and \(y\) be anything.  By \((x,y)\) we denote the
+  \defterm{ordered pair} consisting of \(x\) followed by \(y\).  Given
+  two ordered pairs \((x_0,y_0)\) and \((x_1,y_1)\), we consider
+  \((x_0,y_0) = (x_1,y_1)\) if \(x_0 = x_1\) and \(y_0 = y_1\).
+\end{definition}
+
+\begin{definition}
+  Let \(X\) and \(Y\) be sets.  The \defterm{Cartesian product} of
+  \(X\) and \(Y\), written \(X \cartesianprod Y\), is the set of all
+  ordered pairs \((x,y)\) such that \(x \in X\) and \(y \in Y\).
+\end{definition}
+
+\begin{definition}
+  Let \(X\) and \(Y\) be sets.  A \defterm{binary relation} from \(X\)
+  to \(Y\) is a subset of \(X \cartesianprod Y\).  If \(X = Y\), we
+  say that we have a binary relation on \(X\).  If \(R\) is a binary
+  relation from \(X\) to \(Y\), \(x \in X\), and \(y \in Y\), we write
+  either \(R(x,y)\) or \(xRy\) as shorthand for \((x,y) \in R\).
+\end{definition}
+
+\begin{definition}
+  Let \(X\) be a set.  By the \defterm{power set} of \(X\), denoted
+  \(\powerset(X)\), we mean the set of subsets of \(X\).  That is,
+  \[A \in \powerset(X) \iff A \subset X \text{.}\]
+\end{definition}
+
+\subsection{Relations Between Sets}
+\begin{definition}
+  Let \(R\) be a binary relation from \(X\) to \(Y\).  \(R\) is
+  \defterm{left total} if, for all \(x \in X\), there is at least one
+  \(y \in Y\) such that \(xRy\).  \(R\) is \defterm{right total} if,
+  for all \(y \in Y\), there is at least one \(x \in X\) such that
+  \(xRy\).
+\end{definition}
+
+\begin{definition}
+  Let \(R\) be a binary relation from \(X\) to \(Y\).  \(R\) is
+  \defterm{right unique} if, for all \(x \in X\), there is at most one
+  \(y \in Y\) such that \(xRy\).  \(R\) is \defterm{left unique} if,
+  for all \(y \in Y\), there is at most one \(x \in X\) such that
+  \(xRy\).  (Beware the unfortunately asymmetric use of left and right
+  in the definitions of total and unique.)
+\end{definition}
+
+If \(y\) is the unique element such that \(x R y\), we often write
+\(R(x)\) to denote \(y\).  Similarly, if \(x\) is the unique element
+such that \(xRy\), we often write \(\inverse{R}(y)\) to denote \(x\).
+
+\begin{definition}
+  A relation which is left total and right unique is called a
+  \defterm{function}.  A function which is also left unique is called
+  an \defterm{injection} (or is said to be \defterm{injective}).  A
+  function which is also right total is called a \defterm{surjection}
+  (or is said to be \defterm{surjective}).  A function which is both
+  an injection and a surjection (so it is left total, right total,
+  left unique, and right unique) is called a \defterm{bijection} (or
+  is said to be \defterm{bijective}).
+\end{definition}
+
+We often indicate that \(f\) is a function from \(X\) to \(Y\), by
+writing \(f:X \to Y\).
+
+\begin{definition}
+  Let \(X\) be a set.  By \(id_X\), we mean the binary relation on
+  \(X\) defined by
+  \[id_X(x,y) \iff x = y \text{.}\]
+\end{definition}
+
+\begin{definition}
+  Let \(X\) and \(Y\) be sets, and let \(R\) be a binary relation from
+  \(X\) to \(Y\).  By \(\inverse{R}\), we mean the binary relation
+  from \(Y\) to \(X\) defined by
+  \[\inverse{R}(y,x) \iff R(x,y) \text{.}\]
+\end{definition}
+
+\begin{definition}
+  Let \(X\), \(Y\), and \(Z\) be sets, let \(R\) be a binary relation
+  from \(X\) to \(Y\), and let \(S\) be a binary relation from \(Y\)
+  to \(Z\).  By \(S \compose R\), we mean the binary relation from
+  \(X\) to \(Z\) defined by
+  \[S \compose R(x,z) \iff \text{ there is } y \in Y \text{ such that } R(x,y) \text{ and } S(y,z) \text{.}\]
+\end{definition}
+
+\begin{exercise}
+  Show the following basic facts.
+  \begin{enumerate}
+    \item \(id_X\) is a bijection.
+    \item \(\inverse{(\inverse{R})} = R\).
+    \item \(\inverse{R}\) is left/right unique/total if and only if
+      \(R\) is right/left unique/total.  Note in particular that the
+      inverse of a function is a function if and only if both are
+      bijections.
+    \item If \(R\) is a binary relation from \(X\) to \(Y\), \(id_Y
+      \compose R = R = R \compose id_X\).
+    \item Composition is associative: \((R \compose S) \compose T = R
+      \compose (S \compose T)\).
+    \item \(\inverse{(R \compose S)} = \inverse{S} \compose
+      \inverse{R}\).
+    \item Let \(R\) be a binary relation from \(X\) to \(Y\).  If
+      \(R\) is left total and left unique, then \(\inverse{R} \compose
+      R = id_X\).  If \(R\) is right total and right unique, then \(R
+      \compose \inverse{R} = id_Y\).
+    \item If \(R\) and \(S\) are both left/right total/unique, then
+      \(R \compose S\) is left/right total/unique.
+  \end{enumerate}
+\end{exercise}
+
+\subsection{Relations On Sets}
+\begin{definition}
+  Let \(R\) be a binary relation on \(X\).  \(R\) is
+  \defterm{reflexive} if, for all \(x \in X\), \(xRx\).
+\end{definition}
+
+\begin{definition}
+  Let \(R\) be a binary relation on \(X\).  \(R\) is
+  \defterm{transitive} if whenever \(xRy\) and \(yRz\), we
+  additionally have \(xRz\).  When this occurs, we write \(xRyRz\) as
+  shorthand.
+\end{definition}
+
+\begin{definition}
+  Let \(R\) be a binary relation on \(X\).  \(R\) is
+  \defterm{symmetric} if whenever \(xRy\), we additionally have
+  \(yRx\).
+\end{definition}
+
+\begin{definition}
+  Let \(R\) be a binary relation on \(X\).  \(R\) is
+  \defterm{antisymmetric} if whenever \(xRy\) and \(yRx\), we
+  additionally have \(x = y\).
+\end{definition}
+
+\begin{definition}
+  A preorder on \(X\) is a binary relation on \(X\) which is reflexive
+  and transitive.
+\end{definition}
+
+\begin{definition}
+  An equivalence relation on \(X\) is a preorder on \(X\) which is
+  additionally symmetric.
+\end{definition}
+
+\begin{definition}
+  A partial order on \(X\) is a preorder on \(X\) which is
+  additionally antisymmetric.
+\end{definition}
+
+\begin{exercise}
+  Let \(X\) be a set.  Show that \(id_X\) is an equivalence relation
+  on \(X\).
+\end{exercise}
+
+\begin{exercise}
+  Let \(X\) be a set.  Show that the subset relation is a partial
+  order on \(\powerset(X)\).
+\end{exercise}
+
+\begin{definition}
+  Let \(X\) be a set, and \(E\) be an equivalence relation on \(X\).
+  A subset \(A\) of \(X\) is called an \(E\) \defterm{equivalence
+    class} if there is some \(a \in A\) such that, for all \(x \in
+  X\), \(aEx\) if and only if \(x \in A\).
+\end{definition}
+
+\begin{exercise}
+  Let \(X\) be a set, \(E\) be an equivalence relation on \(X\), \(A
+  \subset X\) be an \(E\) equivalence class, and \(a \in A\).  Then,
+  for all \(x \in X\), \(aEx\) if and only if \(x \in A\).  That is,
+  for any equivalence class, any element of that class can serve as
+  the element used in the definition.
+\end{exercise}
+
+\begin{definition}
+  Let \(X\) be a set, and \(E\) be an equivalence relation on \(X\).
+  The \defterm{quotient} of \(X\) by \(E\), denoted \(X/E\), is the
+  set of \(E\) equivalence classes.  That is,
+  \[A \in X/E \iff A \text{ is an } E \text{ equivalence class.}\]
+\end{definition}
+
+\begin{exercise}
+  Let \(X\) be a set, \(E\) be an equivalence relation on \(X\), and
+  \(x \in X\).  Show that there is a unique \(E\) equivalence class
+  containing \(x\), which we will denote \([x]_E\).  Note that this
+  defines an injection from \(X\) to \(X/E\), called the
+  \defterm{quotient function}.
+\end{exercise}
 
 \section{Orders}
 
