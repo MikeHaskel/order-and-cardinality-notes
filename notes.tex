@@ -24,6 +24,11 @@
 \newcommand{\inverse}[1]{{#1^{-1}}}
 \newcommand{\compose}{\circ}
 \renewcommand{\phi}{\varphi}
+\newcommand{\leqcard}{\mathrel{\leq_\mathsf{card}}}
+\newcommand{\ltcard}{\mathrel{<_\mathsf{card}}}
+\newcommand{\simcard}{\mathrel{\sim_\mathsf{card}}}
+\newcommand{\setclass}{\mathbf{Set}}
+\newcommand{\cardclass}{\mathbf{Card}}
 
 \begin{document}
 \maketitle
@@ -363,13 +368,13 @@ confusion.
 
 \subsection{Some Relationships Between Types of Orders}
 
-\begin{definition}
-  Let \(X\) be a set equipped with preorer \(\leq\).  Let \(\sim\) to
-  be the binary relation on \(X\) defined by
+\begin{definition}\label{def:preorder-equiv}
+  Let \(X\) be a set equipped with preorer \(\leq\).  Let \(\sim\) be
+  the binary relation on \(X\) defined by
   \[x \sim y \iff x \leq y \text{ and } y \leq x \text{.}\]
 \end{definition}
 
-\begin{exercise}
+\begin{exercise}\label{exercise:quotient-preorder-equiv}
   Show that \(\sim\) is a congruence and that the relation induced on
   \(X/{\sim}\) is a partial order.
 \end{exercise}
@@ -391,6 +396,92 @@ confusion.
 \end{definition}
 
 \section{Cardinality}
+By the \defterm{cardinality} of a set, we mean its size.  When we
+compare the cardinality of two (possibly infinite) sets, the natural
+way to do this is to ask whether we can find a copy of one as a subset
+the other; this agrees with our intuition for finite sets.  This
+section makes this idea precise.
+
+\begin{definition}
+  Let \(X\) and \(Y\) be sets.  Write \(X \leqcard Y\) to denote that
+  there is an injection from \(X\) to \(Y\).
+\end{definition}
+
+\begin{exercise}
+  Show that \(\leqcard\) forms a preorder on \(\setclass\), the class
+  of all sets.
+\end{exercise}
+
+\begin{definition}
+  Recall that Definition~\ref{def:preorder-equiv} gives us an
+  equivalence relation associated with \(\leqcard\); let \(\simcard\)
+  denote this equivalence relation.  Furthermore, if \(X\) is a set,
+  it is common to write \(|X|\) in place of \([X]_{\simcard}\).
+  Finally, \(\cardclass\) denotes \(\setclass/{\simcard}\), and we
+  denote the order induced on \(\cardclass\) simply by \(\leq\).  That
+  is, we can write \(X \leqcard Y\) as \(|X| \leq |Y|\).
+\end{definition}
+
+Recall that Exercise~\ref{exercise:quotient-preorder-equiv} tell us
+that \(\leq\) is a partial order on \(\cardclass\).  We will see later
+that \(\leq\) is actually a total order on \(\cardclass\), and is in
+fact a well-order.  We will also see that \(X \simcard Y\) if and only
+if there is a bijection between \(X\) and \(Y\).
+
+No matter how big a set is, its power set is bigger.
+\begin{theorem}[Cantor Diagonalization]
+  Let \(X\) be a set.  Then \(X \ltcard \powerset(X)\).
+\end{theorem}
+\begin{proof}
+  The easy part of this proof is to find an injection \(f:X \to
+  \powerset(X)\).  Define such an \(f\) by
+  \[f(x) = \{x\}\text{,}\]
+  that is, \(f(x)\) is the singleton set containing only \(x\).  It is
+  immediate that \(f:X \to \powerset(X)\) is an injection.
+
+  Now, we must show that \(\powerset(X) \not\leqcard X\).  Assume for
+  contradiction that there is an injection \(f:\powerset(X) \to X\).
+  Define \(A \subset X\) by
+  \[x \in A \iff x \text{ is in the range of } f \text{ and } x \notin \inverse{f}(x) \text{.}\]
+  Noticing that \(f(A)\) is in the range of \(f\), observe:
+  \begin{align*}
+    f(A) \in A
+    &\iff f(A) \notin \inverse{f}(f(A)) \\
+    &\iff f(A) \notin A \text{,}
+  \end{align*}
+  a contradiction.
+\end{proof}
+
+We conclude this section with a classic example that illustrates that
+we can't always use our intuition about finite sets when we think
+about the sizes of infinite sets.
+\begin{example}[Hilbert's Hotel]
+  Let's say that an ordinary hotel has rooms numbered from 0 to \(n\),
+  and that each room can accommodate one guest.  As a thought
+  experiment, consider a special hotel (Hilbert's Hotel) with
+  infinitely many rooms, one numbered with each nonnegative integer.
+
+  In our first scenario, assume that Hilbert's Hotel is full; that is,
+  there is a guest in each room.  If a new guest arrives, it is
+  actually possible to accommodate them: tell each current guest to
+  move to the next numbered room (i.e., the guest in room \(n\) moves
+  to room \(n+1\)).  After this procedure, each current guest has a
+  room to themselves, and room 0 is free for the new guest.  In the
+  precise language we've developed, there is an injection from the
+  nonnegative integers to the positive integers; the positive integers
+  are at least as big as the nonnegative integers, even though they
+  are a proper subset.
+
+  As a second scenario, assume that Hilbert's Hotel is full, and that
+  infinitely many new guests arrive (themselves numbered with positive
+  integers).  It is \emph{still} possible to accommodate all these
+  guests: tell the current guest of each room \(n\) to move to the
+  even-numbered room \(2n\), and tell each new guest numbered \(n\) to
+  move to the odd-numbered room \(2n+1\).  In our precise language,
+  we've found an injection from pairs of nonnegative integers to
+  nonnegative integers; there are no more pairs of nonnegative
+  integers than there are nonnegative integers themselves.
+\end{example}
 
 \section{Well-Order}
 
