@@ -140,19 +140,13 @@ such that \(xRy\), we often write \(\inverse{R}(y)\) to denote \(x\).
   is said to be \defterm{bijective}).
 \end{definition}
 
-We often indicate that \(f\) is a function from \(X\) to \(Y\), by
+We often indicate that \(f\) is a function from \(X\) to \(Y\) by
 writing \(f:X \to Y\).
 
 \begin{definition}
   Let \(X\) be a set.  By \(id_X\), we mean the binary relation on
   \(X\) defined by
   \[id_X(x,y) \iff x = y \text{.}\]
-\end{definition}
-
-\begin{definition}
-  When \(X \subset Y\), we can view \(id_X\) as an injection from
-  \(X\) to \(Y\).  When viewed as such, this injection is called the
-  \defterm{inclusion map} from \(X\) to \(Y\).
 \end{definition}
 
 \begin{definition}
@@ -173,7 +167,10 @@ writing \(f:X \to Y\).
 \begin{exercise}
   Show the following basic facts.
   \begin{enumerate}
-    \item \(id_X\) is a bijection.
+    \item \(id_X\) is a bijection from \(X\) to \(X\).
+    \item If \(X \subset Y\), then \(id_X\) is an injection from \(X\)
+      to \(Y\).  When viewed as such, \(id_X\) is called the
+      \defterm{inclusion map} from \(X\) to \(Y\).
     \item \(\inverse{(\inverse{R})} = R\).
     \item \(\inverse{R}\) is left/right unique/total if and only if
       \(R\) is right/left unique/total.  Note in particular that the
