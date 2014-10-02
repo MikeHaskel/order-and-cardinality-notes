@@ -23,6 +23,7 @@
 \newcommand{\cartesianprod}{\times}
 \newcommand{\inverse}[1]{{#1^{-1}}}
 \newcommand{\compose}{\circ}
+\renewcommand{\phi}{\varphi}
 
 \begin{document}
 \maketitle
@@ -144,6 +145,12 @@ writing \(f:X \to Y\).
 \end{definition}
 
 \begin{definition}
+  When \(X \subset Y\), we can view \(id_X\) as an injection from
+  \(X\) to \(Y\).  When viewed as such, this injection is called the
+  \defterm{inclusion map} from \(X\) to \(Y\).
+\end{definition}
+
+\begin{definition}
   Let \(X\) and \(Y\) be sets, and let \(R\) be a binary relation from
   \(X\) to \(Y\).  By \(\inverse{R}\), we mean the binary relation
   from \(Y\) to \(X\) defined by
@@ -208,18 +215,24 @@ writing \(f:X \to Y\).
 \end{definition}
 
 \begin{definition}
-  A preorder on \(X\) is a binary relation on \(X\) which is reflexive
-  and transitive.
+  A \defterm{preorder} on \(X\) is a binary relation on \(X\) which is
+  reflexive and transitive.
 \end{definition}
 
 \begin{definition}
-  An equivalence relation on \(X\) is a preorder on \(X\) which is
-  additionally symmetric.
+  An \defterm{equivalence relation} on \(X\) is a preorder on \(X\)
+  which is additionally symmetric.
 \end{definition}
 
 \begin{definition}
-  A partial order on \(X\) is a preorder on \(X\) which is
+  A \defterm{partial order} on \(X\) is a preorder on \(X\) which is
   additionally antisymmetric.
+\end{definition}
+
+\begin{definition}
+  A \defterm{total order} on \(X\) is a partial order \(\leq\) on
+  \(X\) with the additional property that, for all \(x,y \in X\),
+  either \(x \leq y\) or \(y \leq x\).
 \end{definition}
 
 \begin{exercise}
@@ -231,6 +244,8 @@ writing \(f:X \to Y\).
   Let \(X\) be a set.  Show that the subset relation is a partial
   order on \(\powerset(X)\).
 \end{exercise}
+
+Observe that the usual order on the real numbers is a total order.
 
 \begin{definition}
   Let \(X\) be a set, and \(E\) be an equivalence relation on \(X\).
@@ -258,11 +273,122 @@ writing \(f:X \to Y\).
   Let \(X\) be a set, \(E\) be an equivalence relation on \(X\), and
   \(x \in X\).  Show that there is a unique \(E\) equivalence class
   containing \(x\), which we will denote \([x]_E\).  Note that this
-  defines an injection from \(X\) to \(X/E\), called the
-  \defterm{quotient function}.
+  defines a surjection from \(X\) to \(X/E\), called the
+  \defterm{quotient map}.
 \end{exercise}
 
-\section{Orders}
+\section{Ordered Sets}
+In this section, we will develop some more detailed machinery for
+working with sets equipped with an order relation.  The main mechanism
+for this machinery is that of a homomorphism.
+
+\subsection{Homomorphisms}
+A homomorphism is a function between sets that preserves whatever
+additional structure those sets may be equipped with.  They are useful
+in that they allow us to move information about ordering from one set
+to another.
+
+\begin{definition}
+  Let \(X\) and \(Y\) be sets equipped with binary relations \(R_X\)
+  and \(R_Y\), respectively.  A \defterm{homomorphism} from \(X\) to
+  \(Y\) is a function \(f\) from \(X\) to \(Y\) with the property
+  that, for all \(x_0,x_1 \in X\), \(x_0R_Xx_1\) if and only if
+  \(f(x_0)R_Yf(x_1)\).
+\end{definition}
+
+\begin{exercise}
+  Let \(X\) and \(Y\) be sets equipped with binary relations \(R_X\)
+  and \(R_Y\), respectively, and let \(f:X \to Y\) be a homomorphism.
+  If \(R_X\) is antisymmetric and \(R_Y\) is reflexive, then \(f\) is
+  an injection.
+\end{exercise}
+
+\begin{definition}
+  Let \(X\) be a set, let \(Y\) be a set equipped with a binary
+  relation \(R\), and let \(f:X \to Y\) be a function.  The
+  \defterm{pullback} of \(R\) along \(X\), sometimes denoted \(f^\star
+  R\), is the binary relation on \(X\) defined by
+  \[(f^\star R)(x, y) \iff R(f(x), f(y)) \text{.}\]
+\end{definition}
+
+\begin{exercise}
+  Let \(X\) and \(Y\) be sets equipped with binary relations \(R_X\)
+  and \(R_Y\), respectively, and let \(f:X \to Y\) be a function.
+  Show that \(f\) is a homomorphism if and only if \(R_X = f^\star
+  R_Y\).  Note that this exercise shows that the pullback of a
+  relation along a function yields the unique relation for which that
+  function is a homomorphism.
+\end{exercise}
+
+\begin{definition}
+  An \defterm{isomorphism} is a homomorphism which is additionally a
+  bijection.
+\end{definition}
+
+\begin{exercise}
+  Show that the inverse of a homomorphism is a homomorphism.
+\end{exercise}
+
+\subsection{Congruences}
+Congruences generalize the ideas of equivalence relation and quotient
+map to sets equipped with binary relations.
+
+\begin{definition}
+  Let \(X\) be a set equipped with the binary relation \(R\).  A
+  \defterm{congruence} of \(X\) is an equivalence relation \(E\) on
+  \(X\) with the property that, whenever \(x_0Ex_1\) and \(y_0Ey_1\),
+  \(x_0Ry_0\) if and only if \(x_1Ry_1\).  That is, \(R\) depends only
+  on the equivalence class of its arguments.
+\end{definition}
+
+\begin{definition}
+  Let \(X\) be a set equipped with a binary relation \(R\), and let
+  \(E\) be a congruence of \(X\).  Then \(R/E\) is the binary relation
+  on \(X/E\) defined by
+  \[[x]_E (R/E) [y]_E \iff xRy \text{.}\]
+  That is, \(R/E\) holds of two equivalence classes only if it holds
+  on the members of those classes.  Note that this definition doesn't
+  even make sense unless \(E\) is a congruence.
+\end{definition}
+
+\begin{exercise}
+  Let \(X\) be a set equipped with a binary relation \(R\).  If \(E\)
+  is a congruence, show that the quotient map is a homomorphism (when
+  \(X/E\) is considered equipped with the binary relation \(R/E\)).
+\end{exercise}
+
+From this point on, we will be less careful about naming each relation
+uniquely and explicitly in cases where there is no chance for
+confusion.
+
+\subsection{Some Relationships Between Types of Orders}
+
+\begin{definition}
+  Let \(X\) be a set equipped with preorer \(\leq\).  Let \(\sim\) to
+  be the binary relation on \(X\) defined by
+  \[x \sim y \iff x \leq y \text{ and } y \leq x \text{.}\]
+\end{definition}
+
+\begin{exercise}
+  Show that \(\sim\) is a congruence and that the relation induced on
+  \(X/{\sim}\) is a partial order.
+\end{exercise}
+
+\begin{exercise}\label{exercise:pullback-order-injection}
+  Let \(X\) be a set, \(Y\) be a set equipped with a preorder/partial
+  order/total order, and \(f:X \to Y\) be an injection.  Show that the
+  pullback of the order along \(f\) yields a preorder/partial
+  order/total order on \(X\).
+\end{exercise}
+
+\begin{definition}
+  Let \(X\) be a set equipped with a partial order.  A \defterm{chain}
+  is a subset \(C\) of \(X\) such that the order induced on \(C\) (by
+  the pullback along the inclusion map) is a total order.  (Note that
+  Exercise~\ref{exercise:pullback-order-injection} already tells us
+  that we get a partial order; the only requirement we're adding is
+  that we can compare any two elements of \(C\).)
+\end{definition}
 
 \section{Cardinality}
 
